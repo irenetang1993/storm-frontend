@@ -1,6 +1,9 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '@/store'
+import urlObj from './requireURLs'
+import { Message, MessageBox } from 'element-ui'
+import { getToken } from '@/utils/auth'
 
 const service = axios.create({
   baseURL: `${process.env.BASE_API}/api/`,
@@ -25,7 +28,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   /** response结构
    * {
-   *   data: { 
+   *   data: {
    *     code: '', 后台自定义的状态码
    *     data: {}, 后台返回的正确数据
    *     msg: '' 错误信息
@@ -38,12 +41,12 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    if (response.headers['content-type'].indexOf('application/vnd.ms-excel') !== -1) {
-      // 返回值是excel，直接下载
-      let fileName = response.headers['content-disposition'].split('=')[1]
-      jsd(res, fileName)
-      return
-    }
+    // if (response.headers['content-type'].indexOf('application/vnd.ms-excel') !== -1) {
+    //   // 返回值是excel，直接下载
+    //   let fileName = response.headers['content-disposition'].split('=')[1]
+    //   jsd(res, fileName)
+    //   return
+    // }
     if (res.code === 20000) {
       return res
     } else {

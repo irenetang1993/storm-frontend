@@ -12,6 +12,8 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/styles/index.scss'
 
+import './mock'
+
 Vue.use(ElementUI, {
   size: 'medium'
 })
